@@ -133,6 +133,10 @@ public with sharing class AccountServiceLayer {
             throw new ASLException(nae.getMessage());
         }
     }
+    /**
+     * @description Creates a default account if the user has access to update
+     *  the Account Object.
+     */
     public static Account createDefaultAccount(){
         Account acc = new Account();
         acc.name = 'Default Account';
