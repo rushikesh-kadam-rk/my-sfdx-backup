@@ -9,18 +9,18 @@ public with sharing class ApexClassUtilities {
     /**
      * @description Extracts the @group annotation from a class' body.
      * Also demonstrates the use of Regex matchers in Apex.
-     * @param klass an ApexClass object
+     * @param theApexClass an ApexClass object
      * @return     `String` This is the text following '@group' through
      * the end of the line.
      * @example
-     * ApexClass klass = [SELECT Name, Body FROM ApexClass LIMIT 1];
-     * System.debug(ApexClassUtilities.getGroupBodyFromClassBody(klass));
+     * ApexClass theApexClass = [SELECT Name, Body FROM ApexClass LIMIT 1];
+     * System.debug(ApexClassUtilities.getGroupBodyFromClassBody(theApexClass));
      */
-    public static String getGroupFromClassBody(ApexClass klass) {
+    public static String getGroupFromClassBody(ApexClass theApexClass) {
         Pattern patternForFindingGroupTagInHeader = Pattern.compile(
             '.*@group.(.*)'
         );
-        Matcher matcher = patternForFindingGroupTagInHeader.matcher(klass.Body);
+        Matcher matcher = patternForFindingGroupTagInHeader.matcher(theApexClass.Body);
         matcher.find();
         String groupName = '';
         try {
@@ -28,7 +28,7 @@ public with sharing class ApexClassUtilities {
         } catch (StringException matcherException) {
             System.debug(
                 LoggingLevel.INFO,
-                'Failed to extract group name. Class name: ' + klass.Name
+                'Failed to extract group name. Class name: ' + theApexClass.Name
             );
         }
 
